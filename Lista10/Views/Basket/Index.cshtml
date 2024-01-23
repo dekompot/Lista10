@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Tuple<Lista10.Models.Article,int>>
+
+@{
+    ViewData["Title"] = "Basket";
+}
+
+<h1>Basket</h1>
+
+@if(Model.Count() != 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Item1.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Item1.ImageName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Item1.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Item1.ExpirationDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Item1.Category)
+                </th>
+                <th>
+                    Pieces
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="categoryRow" data-categoryid="@item.Item1.CategoryId">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Item1.Name)
+                    </td>
+                    <td>
+                        <img class="index_image" src="~/@Url.Content(item.Item1.ImageName is null ? "Images/no_image.jpg" : "Uploads/" + item.Item1.ImageName)" alt="Image">
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Item1.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Item1.ExpirationDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Item1.Category.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Item2)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("AddToBasket", new { id = item.Item1.ArticleId })" class="btn btn-success">+</a>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("RemoveFromBasket", new { id = item.Item1.ArticleId })" class="btn btn-dark">-</a>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("RemoveAllPiecesFromBasket", new { id = item.Item1.ArticleId })" class="btn btn-danger">Remove</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <caption>
+            Total: @ViewBag.Total $
+        </caption>
+    </table>
+}
+else {
+    <img src="~/@Url.Content("Images/empty_basket.png")" alt="Empty basket">
+}
+

@@ -1,14 +1,22 @@
 ﻿@model IEnumerable<Lista10.Models.Article>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Shop";
 }
 
 <h1>Shop</h1>
-<div>
-    <label class="control-label"></label>
-    <select id="categoryFilter" class="form-control" asp-items="ViewBag.CategoryId"></select>
-</div>
+@using (Html.BeginForm("Index","Shop",FormMethod.Get))
+{
+    <fieldset>
+        Category
+        @Html.DropDownList("Category")
+
+        <p>
+            <input type="submit" value="Show" />
+        </p>
+
+    </fieldset>
+}
 
 <table class="table">
     <thead>
@@ -50,31 +58,11 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Category.Name)
                 </td>
+                <td>
+                    <a href="@Url.Action("AddToBasket", new { id = item.ArticleId })" class="btn btn-success">+</a>
+                </td>
             </tr>
         }
     </tbody>
 </table>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var categorySelect = document.getElementById("categoryFilter");
-        categorySelect.addEventListener("change", function () {
-            var selectedCategoryId = this.value;
-            var categoryRows = document.querySelectorAll(".categoryRow");
-
-            if (selectedCategoryId) {
-                categoryRows.forEach(function (row) {
-                    if (row.dataset.categoryid === selectedCategoryId) {
-                        row.style.display = "table-row";
-                    } else {
-                        row.style.display = "none";
-                    }
-                });
-            } else {
-                categoryRows.forEach(function (row) {
-                    row.style.display = "table-row";
-                });
-            }
-        });
-    });
-</script>
