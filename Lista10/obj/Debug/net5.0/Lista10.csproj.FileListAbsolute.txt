@@ -187,3 +187,11 @@ C:\Users\48791\source\repos\Lista10\Lista10\bin\Debug\net5.0\Microsoft.AspNetCor
 C:\Users\48791\source\repos\Lista10\Lista10\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.UI.dll
 C:\Users\48791\source\repos\Lista10\Lista10\bin\Debug\net5.0\Microsoft.Extensions.FileProviders.Embedded.dll
 C:\Users\48791\source\repos\Lista10\Lista10\obj\Debug\net5.0\Lista10.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\48791\source\repos\Lista10\Lista10\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Login.cshtml.g.cs
+C:\Users\48791\source\repos\Lista10\Lista10\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Logout.cshtml.g.cs
+C:\Users\48791\source\repos\Lista10\Lista10\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Register.cshtml.g.cs
+C:\Users\48791\source\repos\Lista10\Lista10\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\_ViewImports.cshtml.g.cs
+C:\Users\48791\source\repos\Lista10\Lista10\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\48791\source\repos\Lista10\Lista10\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
+C:\Users\48791\source\repos\Lista10\Lista10\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
+C:\Users\48791\source\repos\Lista10\Lista10\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs

@@ -22,7 +22,7 @@ namespace Lista10.Data
                 };
                 IdentityResult roleResult = roleManager.CreateAsync(role).Result;
             }
-            if (!roleManager.RoleExistsAsync(„Dean").Result)
+            if (!roleManager.RoleExistsAsync("Dean").Result)
             {
                 IdentityRole role = new IdentityRole
                 {

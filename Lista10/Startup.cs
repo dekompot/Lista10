@@ -27,6 +27,8 @@ namespace Lista10
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddRazorPages();
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
@@ -36,7 +38,7 @@ namespace Lista10
 
             services.AddDefaultIdentity<IdentityUser>()
                 .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<DbContext>();
+                .AddEntityFrameworkStores<MyDbContext>();
 
             services.AddControllersWithViews();
             services.AddDbContextPool<MyDbContext>
@@ -58,7 +60,6 @@ namespace Lista10
                 app.UseHsts();
             }
 
-            app.AddRazorPages();
             app.UseAuthentication();
             app.UseAuthorization();
             MyIdentityDataInitializer.SeedData(userManager, roleManager);
@@ -77,6 +78,7 @@ namespace Lista10
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Articles}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
 
             var cultureInfo = new CultureInfo("en-US");
