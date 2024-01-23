@@ -1,5 +1,7 @@
-﻿using Lista10.Data;
+﻿using Lista10.Attributes;
+using Lista10.Data;
 using Lista10.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,6 +13,8 @@ using System.Threading.Tasks;
 
 namespace Lista10.Controllers
 {
+    [AllowAnonymous]
+    [DenyRole("Admin")]
     public class BasketController : Controller
     {
         private readonly MyDbContext _context;

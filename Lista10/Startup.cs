@@ -36,6 +36,13 @@ namespace Lista10
                 options.Cookie.IsEssential = true;
             });
 
+            /*services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AllowBasket", policy =>
+                    policy.REqui
+                )
+            });*/
+
             services.AddDefaultIdentity<IdentityUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<MyDbContext>();
