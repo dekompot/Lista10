@@ -195,3 +195,4 @@ C:\Users\48791\source\repos\Lista10\Lista10\obj\Debug\net5.0\Razor\Areas\Identit
 C:\Users\48791\source\repos\Lista10\Lista10\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 C:\Users\48791\source\repos\Lista10\Lista10\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 C:\Users\48791\source\repos\Lista10\Lista10\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
+C:\Users\48791\source\repos\Lista10\Lista10\obj\Debug\net5.0\Razor\Views\Basket\Summarize.cshtml.g.cs

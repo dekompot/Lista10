@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,17 +26,23 @@ namespace Lista10.Controllers
         public async Task<IActionResult> Index()
         {
             ClearCookies();
-            var articlesWithCategories = await _context.Article
+            var tupleList = ReadCookies();
+            ViewBag.Total = tupleList.Select(i => i.Item1.Price * i.Item2).Sum();
+            return View(tupleList);
+        }
+
+        private List<Tuple<Article, int>> ReadCookies()
+        {
+            var articlesWithCategories = _context.Article
                 .Include(a => a.Category)
-                .ToListAsync();
+                .ToList();
 
             var tupleList = articlesWithCategories
                 .Select(a => new Tuple<Article, int>(a, GetPieces(a.ArticleId)))
-                .Where (t => t.Item2 > 0)
+                .Where(t => t.Item2 > 0)
                 .ToList();
 
-            ViewBag.Total = tupleList.Select(i => i.Item1.Price * i.Item2).Sum();
-            return View(tupleList);
+            return tupleList;
         }
 
         public void ClearCookies()
@@ -80,6 +87,15 @@ namespace Lista10.Controllers
         {
             DeleteCookie(id);
             return RedirectToAction(nameof(Index));
+        }
+
+        [Authorize]
+        public IActionResult Summarize()
+        {
+            ClearCookies();
+            var tupleList = ReadCookies();
+            ViewBag.Total = tupleList.Select(i => i.Item1.Price * i.Item2).Sum();
+            return View(tupleList);
         }
 
         public IActionResult RemoveFromBasket(int id)

@@ -84,7 +84,7 @@ namespace Lista10
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Articles}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
 
