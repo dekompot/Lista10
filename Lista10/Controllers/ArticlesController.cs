@@ -13,9 +13,11 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Hosting;
 using Lista10.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Lista10.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ArticlesController : Controller
     {
         private readonly MyDbContext _context;
