@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using IOFile = System.IO;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Lista10.Data;
 using Lista10.Models;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Hosting;
 using Lista10.ViewModels;
 using Microsoft.AspNetCore.Http;

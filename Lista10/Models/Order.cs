@@ -9,10 +9,21 @@ namespace Lista10.Models
     {
         public int OrderId { get; set; }
 
+        [Required]
         [DataType(DataType.DateTime)]
         [Display(Name = "Expiration date")]
         [HiddenInput]
         public DateTime Timestamp { get; set; } = DateTime.Now;
-        public IdentityUser User
+        [Required]
+        public string UserId { get; set; }
+        [Required]
+        public IdentityUser User { get; set; }
+        [Required]
+        public string Destination { get; set; }
+        [Required]
+        public string Name {  get; set; }
+        [Required]
+        [Display(Name = "Phone number")]
+        public string PhoneNumber { get; set; }
     }
 }

@@ -50,6 +50,11 @@ namespace Lista10
             services.AddControllersWithViews();
             services.AddDbContextPool<MyDbContext>
                 (options => options.UseSqlServer(Configuration.GetConnectionString("MyDB")));
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "WebAppApiTest", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +64,8 @@ namespace Lista10
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAppApiTest v1"));
             }
             else
             {

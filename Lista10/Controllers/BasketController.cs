@@ -1,6 +1,7 @@
 ﻿using Lista10.Attributes;
 using Lista10.Data;
 using Lista10.Models;
+using Lista10.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -96,6 +98,22 @@ namespace Lista10.Controllers
             var tupleList = ReadCookies();
             ViewBag.Total = tupleList.Select(i => i.Item1.Price * i.Item2).Sum();
             return View(tupleList);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public IActionResult Confirm(OrderViewModel order)
+        {
+            foreach (var cookie in Request.Cookies)
+            {
+                int value;
+                if(Int32.TryParse(cookie.Key, out value))
+                {
+                    Response.Cookies.Delete(cookie.Key);
+                }
+            }
+            return View(order);
         }
 
         public IActionResult RemoveFromBasket(int id)
