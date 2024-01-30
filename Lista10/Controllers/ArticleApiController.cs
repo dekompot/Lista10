@@ -1,12 +1,15 @@
 ﻿using Lista10.Data;
 using Lista10.Models;
 using Lista10.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using IOFile = System.IO;
 
@@ -16,6 +19,7 @@ namespace Lista10.Controllers
 {
     [Route("api/article")]
     [ApiController]
+    [Authorize(Roles ="Admin")]
     public class ArticleApiController : ControllerBase
     {
         private readonly MyDbContext _context;
@@ -28,6 +32,7 @@ namespace Lista10.Controllers
         }
         // GET: api/<ValuesController>
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<Article>>> Get()
         {
             return await _context.Article.ToListAsync();
@@ -35,6 +40,7 @@ namespace Lista10.Controllers
 
         // GET api/<ValuesController>/5
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<Article>> Get(int id)
         {
             var article = await _context.Article
@@ -48,6 +54,24 @@ namespace Lista10.Controllers
             {
                 return article;
             }
+        }
+
+        [HttpGet("next")]
+        [AllowAnonymous]
+        public async Task<ActionResult<IEnumerable<Article>>> GetNext(int page, int pageSize, string categoryId)
+        {
+            IQueryable<Article> articlesQuery = _context.Article.Include(a => a.Category);
+            if (categoryId != "-1")
+            {
+                articlesQuery = articlesQuery.Where(a => a.CategoryId.ToString() == categoryId);
+            }
+
+            var articles = await articlesQuery
+                .Skip(page*pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return articles;
         }
 
         // POST api/<ValuesController>
