@@ -67,7 +67,15 @@
             }
         </tbody>
         <caption>
-            Total: @ViewBag.Total $
+            <div>
+                Total: @ViewBag.Total $ 
+            </div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div>
+                    <a asp-action="Summarize" type="button" class="btn btn-primary ">Buy</a>
+                </div>
+            }
         </caption>
     </table>
 }

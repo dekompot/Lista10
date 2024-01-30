@@ -10,9 +10,11 @@ using Lista10.Models;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using Lista10.Attributes;
 
 namespace Lista10.Controllers
 {
+    [DenyRole("Admin")]
     public class ShopController : Controller
     {
         private readonly MyDbContext _context;

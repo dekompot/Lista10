@@ -22,18 +22,10 @@ namespace Lista10.Data
                 };
                 IdentityResult roleResult = roleManager.CreateAsync(role).Result;
             }
-            if (!roleManager.RoleExistsAsync("Dean").Result)
-            {
-                IdentityRole role = new IdentityRole
-                {
-                    Name = "Dean",
-                };
-                IdentityResult roleResult = roleManager.CreateAsync(role).Result;
-            }
         }
 
         public static void SeedOneUser(UserManager<IdentityUser> userManager,
-string name, string password, string role = null)
+                            string name, string password, string role = null)
         {
             if (userManager.FindByNameAsync(name).Result == null)
             {
@@ -53,7 +45,6 @@ string name, string password, string role = null)
         {
             SeedOneUser(userManager, "normaluser@localhost", "nUpass1!");
             SeedOneUser(userManager, "adminuser@localhost", "aUpass1!", "Admin");
-            SeedOneUser(userManager, "deanuser@localhost", "dUpass1!", "Dean");
         }
 
     }

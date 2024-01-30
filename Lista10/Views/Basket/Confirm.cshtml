@@ -1,0 +1,26 @@
+﻿@model Lista10.ViewModels.OrderViewModel
+@{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">@Html.DisplayNameFor(model => model.UserName)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Destination)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="col">@Html.DisplayFor(model => model.UserName)</th>
+                <th scope="col">@Html.DisplayFor(model => model.Name)</th>
+                <th scope="col">@Html.DisplayFor(model => model.PhoneNumber)</th>
+                <th scope="col">@Html.DisplayFor(model => model.Destination)</th>
+            </tr>
+        </tbody>
+    </table>
+    <caption>
+        <div>
+            <a asp-action="Index" type="button" class="btn btn-primary ">Back</a>
+        </div>
+    </caption>
+}

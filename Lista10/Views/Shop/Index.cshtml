@@ -5,18 +5,15 @@
 }
 
 <h1>Shop</h1>
-@using (Html.BeginForm("Index","Shop",FormMethod.Get))
-{
-    <fieldset>
-        Category
-        @Html.DropDownList("Category")
 
-        <p>
-            <input type="submit" value="Show" />
-        </p>
+<fieldset id="category">
+    Category
+    @Html.DropDownList("Category")
 
-    </fieldset>
-}
+    <button id="filterButton" class="btn btn-info">Show</button>
+
+</fieldset>
+
 
 <table class="table">
     <thead>
@@ -39,30 +36,67 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr class="categoryRow" data-categoryid="@item.CategoryId">
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    <img class="index_image" src="~/@Url.Content(item.ImageName is null ? "Images/no_image.jpg" : "Uploads/" + item.ImageName)" alt="Image">
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ExpirationDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Category.Name)
-                </td>
-                <td>
-                    <a href="@Url.Action("AddToBasket", new { id = item.ArticleId })" class="btn btn-success">+</a>
-                </td>
-            </tr>
-        }
+    <tbody id="articleContainer">
     </tbody>
 </table>
 
+@section Scripts{
+    <script>
+        let page = 0;
+        const pageSize = 10;
+        const container = $('#articleContainer');
+        const dropdown = document.getElementById('Category');
+
+
+        function loadMoreArticles() {
+            $.ajax({
+                url: `/api/article/next?page=${page}&pageSize=${pageSize}&categoryId=${dropdown.value}`,
+                method: 'GET',
+                success: function (data) {
+                    const container = $('#articleContainer');
+                    displayArticles(data);
+                    page++;
+                },
+                error: function (error) {
+                    console.error('Error loading articles:', error);
+                }
+            });
+        }
+
+        function displayArticles(articles) {
+            articles.forEach(article => {
+                const rowHtml = `<tr class="categoryRow" data-categoryid="${article.categoryId}">
+                                        <td>${article.name}</td>
+                                        <td>    
+                                            <img class="index_image" src="${article.imageName ? 'Uploads/' + article.imageName : 'Images/no_image.jpg'}" alt="Image">
+                                        </td>
+                                        <td>${article.price}</td>
+                                        <td>${article.expirationDate}</td>
+                                        <td>${article.category.name}</td>
+                                        <td><a href="/Shop/AddToBasket?id=${article.articleId}" class="btn btn-success">+</a></td>
+                                    </tr>`;
+
+                container.append(rowHtml);
+            });
+        }
+
+
+        $('#filterButton').on('click', function () {
+            container.empty();
+            page = 0;
+            loadMoreArticles();
+        });
+
+        $(window).scroll(function () {
+            if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+                loadMoreArticles();
+            }
+        });
+
+        $(document).ready(function () {
+            loadMoreArticles();
+            
+        });
+    </script>
+
+}

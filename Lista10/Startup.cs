@@ -36,6 +36,13 @@ namespace Lista10
                 options.Cookie.IsEssential = true;
             });
 
+            /*services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AllowBasket", policy =>
+                    policy.REqui
+                )
+            });*/
+
             services.AddDefaultIdentity<IdentityUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<MyDbContext>();
@@ -43,6 +50,11 @@ namespace Lista10
             services.AddControllersWithViews();
             services.AddDbContextPool<MyDbContext>
                 (options => options.UseSqlServer(Configuration.GetConnectionString("MyDB")));
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "WebAppApiTest", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +64,8 @@ namespace Lista10
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAppApiTest v1"));
             }
             else
             {
@@ -77,7 +91,7 @@ namespace Lista10
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Articles}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
 

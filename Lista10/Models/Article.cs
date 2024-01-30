@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System;
-using Microsoft.AspNetCore.Http;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Lista10.Models
 {
